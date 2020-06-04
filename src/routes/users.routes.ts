@@ -10,7 +10,7 @@ const usersRouters = Router();
 const upload = multer(uploadConfig);
 
 usersRouters.post('/', async (request, response) => {
-    try {
+  
         const { name, email, password } = request.body;
 
         const createUser = new CreateUserService();
@@ -24,9 +24,7 @@ usersRouters.post('/', async (request, response) => {
         delete user.password;
 
         return response.json(user);
-    } catch (err) {
-        return response.status(400).json({ error: err.message });
-    }
+  
 });
 
 usersRouters.patch(
@@ -35,7 +33,7 @@ usersRouters.patch(
     upload.single('avatar'),
     async (request, response) => {
         // console.log(request.file);
-        try {
+       
             const updateUserAvatar = new UpdateAvatarUserService();
             const user = await updateUserAvatar.execute({
                 user_id: request.user.id,
@@ -44,9 +42,7 @@ usersRouters.patch(
 
             delete user.password;
             return response.json(user);
-        } catch (err) {
-            return response.status(400).json({ error: err.message });
-        }
+      
     },
 );
 
